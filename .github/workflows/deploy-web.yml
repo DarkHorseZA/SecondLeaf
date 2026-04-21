@@ -32,14 +32,26 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Export Expo web build
+      - name: Build v1 (default)
+        env:
+          EXPO_PUBLIC_VARIANT: v1
         run: npx expo export --platform web --output-dir dist
 
-      - name: Create SPA fallback (404.html)
-        run: cp dist/index.html dist/404.html
+      - name: Build v2
+        # v2 lives at /SecondLeaf/v2/. If it fails we still ship v1 below.
+        continue-on-error: true
+        env:
+          EXPO_PUBLIC_VARIANT: v2
+        run: |
+          npx expo export --platform web --output-dir dist-v2
+          mkdir -p dist/v2
+          cp -R dist-v2/. dist/v2/
 
-      - name: Disable Jekyll processing
-        run: touch dist/.nojekyll
+      - name: SPA fallback + Pages polish
+        run: |
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
+          if [ -f dist/v2/index.html ]; then cp dist/v2/index.html dist/v2/404.html; fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,6 +1,7 @@
 node_modules/
 .expo/
 dist/
+dist-v2/
 web-build/
 .metro-health-check*
 npm-debug.*

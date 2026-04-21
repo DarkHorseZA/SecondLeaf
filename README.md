@@ -39,12 +39,27 @@ GitHub Pages on every push to `main` or
 After the first successful run, the app is live at:
 
 ```
-https://<owner>.github.io/SecondLeaf/
+https://<owner>.github.io/SecondLeaf/            # v1 — botanical-journal look
+https://<owner>.github.io/SecondLeaf/v2/         # v2 — matches live secondleaf.co.uk
 ```
 
-Open that URL on your phone and add it to your homescreen — the exact
+Open either URL on your phone and add it to your homescreen — the exact
 same PWA pattern Second Leaf uses on the web
 (`?launchedfrom=homescreen&display=List`).
+
+## Two variants
+
+Both variants share the same screens and state. The variant is chosen at
+bundle time via the `EXPO_PUBLIC_VARIANT` environment variable:
+
+| Variant | Build command | URL path | Look |
+| --- | --- | --- | --- |
+| v1 *(default)* | `EXPO_PUBLIC_VARIANT=v1 npx expo export --platform web` | `/SecondLeaf/` | Forest green + serif, mobile-native tabs |
+| v2 | `EXPO_PUBLIC_VARIANT=v2 npx expo export --platform web` | `/SecondLeaf/v2/` | Live-site branding — vibrant `#2ECC71`, teal `#0B5454`, sans-serif, hamburger menu |
+
+The CI workflow (`.github/workflows/deploy-web.yml`) builds both sequentially,
+nests v2 inside v1's `dist/`, and publishes both to Pages in one artifact.
+If v2 ever fails to build, the job still ships v1.
 
 ## Branding
 
