@@ -27,6 +27,25 @@ npm start           # opens Expo Dev Tools
 npm run ios         # or android / web
 ```
 
+## Preview on your phone (GitHub Pages)
+
+A GitHub Actions workflow builds the web version and publishes it to
+GitHub Pages on every push to `main` or
+`claude/secondleaf-mobile-app-ezDtE`.
+
+**One-time setup:** in the repo, go to **Settings → Pages** and set
+**Source: GitHub Actions**.
+
+After the first successful run, the app is live at:
+
+```
+https://<owner>.github.io/SecondLeaf/
+```
+
+Open that URL on your phone and add it to your homescreen — the exact
+same PWA pattern Second Leaf uses on the web
+(`?launchedfrom=homescreen&display=List`).
+
 ## Branding
 
 Pulled from the Second Leaf identity and extended into a full mobile system.
