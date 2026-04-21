@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { RootStackParamList, TabsParamList } from './types';
-import { colors, type, spacing, isV2 } from '@/theme';
+import { colors, type, spacing } from '@/theme';
 import { useApp } from '@/context/AppContext';
 
 import { BrowseScreen } from '@/screens/BrowseScreen';
@@ -44,7 +44,7 @@ function TabsNavigator() {
         headerShown: false,
         tabBarActiveTintColor: colors.leaf,
         tabBarInactiveTintColor: colors.inkMuted,
-        tabBarStyle: isV2 ? { display: 'none' } : styles.tabBar,
+        tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.label,
         tabBarIcon: ({ focused, color, size }) => {
           const icon = getIcon(route.name, focused);
